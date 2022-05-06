@@ -13,7 +13,7 @@ export class HelloWorld3View extends LitElement {
 
   render() {
     return html`<vaadin-horizontal-layout theme="margin spacing" class="items-end"
-      ><vaadin-text-field id="name" label="Your name"></vaadin-text-field>
+      ><vaadin-text-field id="name" label="Your name11234"></vaadin-text-field>
       <vaadin-button id="sayHello">Say hello</vaadin-button></vaadin-horizontal-layout
     >`;
   }

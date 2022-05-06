@@ -1,12 +1,24 @@
 package com.example.application.data.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.google.gson.Gson;
 import dev.hilla.Nonnull;
-import java.time.LocalDate;
+
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
-public class SamplePerson extends AbstractEntity {
+@JsonSerialize(using = LocalDateSerializer.class)
+@JsonDeserialize(using = LocalDateDeserializer.class)
+public class SamplePerson extends AbstractEntity implements Serializable {
 
     @Nonnull
     private String firstName;
@@ -17,6 +29,7 @@ public class SamplePerson extends AbstractEntity {
     private String email;
     @Nonnull
     private String phone;
+    @Transient
     private LocalDate dateOfBirth;
     @Nonnull
     private String occupation;
@@ -47,6 +60,7 @@ public class SamplePerson extends AbstractEntity {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    @Transient
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -65,5 +79,12 @@ public class SamplePerson extends AbstractEntity {
     public void setImportant(boolean important) {
         this.important = important;
     }
+
+    @Override
+    public String toString(){
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
 
 }

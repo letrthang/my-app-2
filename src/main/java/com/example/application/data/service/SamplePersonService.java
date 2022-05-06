@@ -4,6 +4,9 @@ import com.example.application.data.entity.SamplePerson;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,10 +25,12 @@ public class SamplePersonService {
         return repository.findById(id);
     }
 
+    @CachePut(value = "SamplePerson123")
     public SamplePerson update(SamplePerson entity) {
         return repository.save(entity);
     }
 
+    @CacheEvict(value = "SamplePerson123")
     public void delete(UUID id) {
         repository.deleteById(id);
     }

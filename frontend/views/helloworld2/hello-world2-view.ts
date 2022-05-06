@@ -18,7 +18,7 @@ export class HelloWorld2View extends View {
 
   render() {
     return html`
-      <vaadin-text-field label="Your name" @value-changed=${this.nameChanged}></vaadin-text-field>
+      <vaadin-text-field label="Your name hilla" @value-changed=${this.nameChanged}></vaadin-text-field>
       <vaadin-button @click=${this.sayHello}>Say hello</vaadin-button>
     `;
   }
